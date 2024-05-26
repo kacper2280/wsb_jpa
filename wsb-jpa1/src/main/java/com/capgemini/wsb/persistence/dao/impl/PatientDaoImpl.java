@@ -16,7 +16,7 @@ public class PatientDaoImpl extends  AbstractDao<PatientEntity, Long> implements
     {
         List<PatientEntity> patients;
         patients = entityManager.createQuery("SELECT p FROM PatientEntity p " +
-                                "WHERE p.lastName LIKE :lastName"
+                        "WHERE p.lastName LIKE :lastName"
                         , PatientEntity.class)
                 .setParameter("lastName", "%" + lastName + "%")
                 .getResultList();
@@ -27,9 +27,9 @@ public class PatientDaoImpl extends  AbstractDao<PatientEntity, Long> implements
     public List<PatientEntity> findPatientsWithMoreVisitsThan(Integer cnt)
     {
         List<PatientEntity> patients;
-        patients = entityManager.createQuery("SELECT DISTINCT p FROM PatientEntity p " +
-                        " JOIN p.visits v" +
-                        " GROUP BY p HAVING COUNT(v) > :cnt", PatientEntity.class)
+        patients = entityManager.createQuery("SELECT DISTINCT p FROM PatientEntity p" +
+                        "JOIN p.visits v" +
+                        "GROUP BY p HAVING COUNT(v) > :cnt", PatientEntity.class)
                 .setParameter("cnt", (long) cnt)
                 .getResultList();
         return patients;
